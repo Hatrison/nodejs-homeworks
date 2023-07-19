@@ -26,17 +26,10 @@ const addContact = async (body) => {
 };
 
 const updateContact = async (contactId, body) => {
-  const contacts = await listContacts();
-  const index = contacts.findIndex((contact) => contact.id === contactId);
-  if (index !== -1) {
-    const result = contacts[index];
-    const updatedContact = { ...result, ...body };
-    contacts.splice(index, 1, updatedContact);
-    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    return updatedContact;
-  } else {
-    return null;
-  }
+  const result = await Contact.findByIdAndUpdate(contactId, body, {
+    new: true,
+  });
+  return result;
 };
 
 module.exports = {

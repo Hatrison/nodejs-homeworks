@@ -49,7 +49,7 @@ router.delete("/:contactId", isValidId, async (req, res, next) => {
   }
 });
 
-router.put("/:contactId", async (req, res, next) => {
+router.put("/:contactId", isValidId, async (req, res, next) => {
   const response = contactSchemaForPut.validate(req.body);
 
   if (typeof response.error !== "undefined") {
