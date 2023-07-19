@@ -11,13 +11,15 @@ const {
   schemas: { contactSchemaForAdd, contactSchemaForPut },
 } = require("../../schemas/contact.js");
 
+const { isValidId } = require("../../middlewares/isValidId");
+
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   res.json(await listContacts());
 });
 
-router.get("/:contactId", async (req, res, next) => {
+router.get("/:contactId", isValidId, async (req, res, next) => {
   const result = await getContactById(req.params.contactId);
 
   if (result === null) {
