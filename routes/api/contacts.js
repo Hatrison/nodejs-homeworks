@@ -39,7 +39,7 @@ router.post("/", express.json(), async (req, res, next) => {
   }
 });
 
-router.delete("/:contactId", async (req, res, next) => {
+router.delete("/:contactId", isValidId, async (req, res, next) => {
   const result = await removeContact(req.params.contactId);
 
   if (result === null) {
