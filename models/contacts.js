@@ -4,9 +4,11 @@ const { nanoid } = require("nanoid");
 
 const contactsPath = path.join(__dirname, "contacts.json");
 
+const { Contact } = require("../schemas/contact.js");
+
 const listContacts = async () => {
-  const contacts = await fs.readFile(contactsPath);
-  return JSON.parse(contacts);
+  const contacts = await Contact.find();
+  return contacts;
 };
 
 const getContactById = async (contactId) => {

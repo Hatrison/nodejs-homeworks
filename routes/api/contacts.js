@@ -8,9 +8,8 @@ const {
 } = require("../../models/contacts");
 
 const {
-  contactSchemaForAdd,
-  contactSchemaForPut,
-} = require("../../schemas/contacts.js");
+  schemas: { contactSchemaForAdd, contactSchemaForPut },
+} = require("../../schemas/contact.js");
 
 const router = express.Router();
 
