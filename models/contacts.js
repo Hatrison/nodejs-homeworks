@@ -1,8 +1,3 @@
-const fs = require("fs/promises");
-const path = require("node:path");
-
-const contactsPath = path.join(__dirname, "contacts.json");
-
 const { Contact } = require("../schemas/contact.js");
 
 const listContacts = async () => {
@@ -32,10 +27,18 @@ const updateContact = async (contactId, body) => {
   return result;
 };
 
+const updateStatusContact = async (contactId, body) => {
+  const result = await Contact.findByIdAndUpdate(contactId, body, {
+    new: true,
+  });
+  return result;
+};
+
 module.exports = {
   listContacts,
   getContactById,
   removeContact,
   addContact,
   updateContact,
+  updateStatusContact,
 };

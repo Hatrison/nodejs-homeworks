@@ -42,6 +42,14 @@ const contactSchemaForPut = Joi.object({
   favorite: Joi.boolean(),
 }).min(1);
 
-const schemas = { contactSchemaForAdd, contactSchemaForPut };
+const contactSchemaForPatch = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
+const schemas = {
+  contactSchemaForAdd,
+  contactSchemaForPut,
+  contactSchemaForPatch,
+};
 
 module.exports = { Contact, schemas };

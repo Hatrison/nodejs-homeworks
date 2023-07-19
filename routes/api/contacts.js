@@ -5,10 +5,11 @@ const {
   addContact,
   removeContact,
   updateContact,
+  updateStatusContact,
 } = require("../../models/contacts");
 
 const {
-  schemas: { contactSchemaForAdd, contactSchemaForPut },
+  schemas: { contactSchemaForAdd, contactSchemaForPut, contactSchemaForPatch },
 } = require("../../schemas/contact.js");
 
 const { isValidId } = require("../../middlewares/isValidId");
@@ -56,6 +57,22 @@ router.put("/:contactId", isValidId, async (req, res, next) => {
     res.status(400).json({ message: "missing fields" });
   } else {
     const result = await updateContact(req.params.contactId, req.body);
+
+    if (result === null) {
+      res.status(404).json({ message: "Not found" });
+    } else {
+      res.status(200).json(result);
+    }
+  }
+});
+
+router.patch("/:contactId/favorite", isValidId, async (req, res, next) => {
+  const response = contactSchemaForPatch.validate(req.body);
+
+  if (typeof response.error !== "undefined") {
+    res.status(400).json({ message: "missing field favorite" });
+  } else {
+    const result = await updateStatusContact(req.params.contactId, req.body);
 
     if (result === null) {
       res.status(404).json({ message: "Not found" });
