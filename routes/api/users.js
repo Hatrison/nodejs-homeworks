@@ -6,6 +6,7 @@ const {
   current,
   updateSubscription,
 } = require("../../controllers/users");
+const { authorization } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -13,10 +14,10 @@ router.post("/register", register);
 
 router.post("/login", login);
 
-router.post("/logout", logout);
+router.post("/logout", authorization, logout);
 
-router.get("/current", current);
+router.get("/current", authorization, current);
 
-router.patch("/subscription", updateSubscription);
+router.patch("/subscription", authorization, updateSubscription);
 
 module.exports = router;
