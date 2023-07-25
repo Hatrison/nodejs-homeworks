@@ -3,6 +3,7 @@ const Joi = require("joi");
 
 // eslint-disable-next-line no-useless-escape
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const subscriptionTypes = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
   {
@@ -18,7 +19,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: subscriptionTypes,
       default: "starter",
     },
     token: {
@@ -42,7 +43,9 @@ const userSchemaAuth = Joi.object({
 });
 
 const userSchemaSubscription = Joi.object({
-  subscription: Joi.string().required(),
+  subscription: Joi.string()
+    .valid(...subscriptionTypes)
+    .required(),
 });
 
 const schemas = {
