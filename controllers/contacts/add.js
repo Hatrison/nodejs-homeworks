@@ -9,7 +9,8 @@ const add = async (req, res, next) => {
   if (typeof response.error !== "undefined") {
     res.status(400).json({ message: "missing required name field" });
   } else {
-    res.status(201).json(await addContact(req.body));
+    const { _id: owner } = req.user;
+    res.status(201).json(await addContact(req.body, owner));
   }
 };
 
