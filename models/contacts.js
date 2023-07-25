@@ -1,7 +1,7 @@
 const { Contact } = require("../schemas/contact.js");
 
 const listContacts = async () => {
-  const contacts = await Contact.find();
+  const contacts = await Contact.find({}, "-createdAt -updatedAt");
   return contacts;
 };
 
