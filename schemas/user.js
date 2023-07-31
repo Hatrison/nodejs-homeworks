@@ -59,9 +59,14 @@ const userSchemaSubscription = Joi.object({
     .required(),
 });
 
+const userSchemaVerify = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+});
+
 const schemas = {
   userSchemaAuth,
   userSchemaSubscription,
+  userSchemaVerify,
 };
 
 module.exports = { User, schemas };
