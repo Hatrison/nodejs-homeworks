@@ -1,4 +1,4 @@
-const { sendEmail } = require("../../helpers");
+const { sendEmail } = require("../../services");
 const {
   schemas: { userSchemaVerify },
   User,

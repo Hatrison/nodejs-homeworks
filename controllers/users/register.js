@@ -5,7 +5,7 @@ const {
 } = require("../../schemas/user");
 const { User } = require("../../schemas/user");
 const { nanoid } = require("nanoid");
-const { sendEmail } = require("../../helpers");
+const { sendEmail } = require("../../services");
 
 const { BASE_URL } = process.env;
 
