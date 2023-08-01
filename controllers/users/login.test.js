@@ -21,6 +21,8 @@ describe("Unit test login controller", () => {
       email: "vadim@gmail.com",
       subscription: "business",
       token: "",
+      verify: true,
+      verificationToken: "TeSt",
     });
   });
 
